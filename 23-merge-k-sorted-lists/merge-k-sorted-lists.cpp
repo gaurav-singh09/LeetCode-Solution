@@ -23,13 +23,27 @@ public:
     }        
 
     
+    // ListNode* mergeKLists(vector<ListNode*>& arr) {
+    //     if(arr.size()==0) return NULL;
+    //     while(arr.size()>1){
+    //         ListNode* a=arr[arr.size()-1];
+    //         arr.pop_back();
+    //         ListNode* b=arr[arr.size()-1];
+    //         arr.pop_back();
+    //         ListNode* c=merge(a,b);
+    //         arr.push_back(c);
+
+    //     }
+    //     return arr[0];
+    // }
+
     ListNode* mergeKLists(vector<ListNode*>& arr) {
         if(arr.size()==0) return NULL;
         while(arr.size()>1){
-            ListNode* a=arr[arr.size()-1];
-            arr.pop_back();
-            ListNode* b=arr[arr.size()-1];
-            arr.pop_back();
+            ListNode* a=arr[0];
+            arr.erase(arr.begin());
+            ListNode* b=arr[0];
+            arr.erase(arr.begin());
             ListNode* c=merge(a,b);
             arr.push_back(c);
 
