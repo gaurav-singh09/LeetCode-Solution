@@ -33,16 +33,29 @@ public:
     // }
 
     //2nd Approach
+    // ListNode* reverseList(ListNode* head) {
+    //     ListNode* prev=NULL;
+    //     ListNode* curr=head;
+    //     ListNode* Next=NULL;
+    //     while(curr!=NULL ){
+    //         Next=curr->next;
+    //         curr->next=prev;
+    //         prev=curr;
+    //         curr=Next;
+    //     }
+    //     return prev;
+    // }    
+
+
+    //3rd Approach recursively
     ListNode* reverseList(ListNode* head) {
-        ListNode* prev=NULL;
-        ListNode* curr=head;
-        ListNode* Next=NULL;
-        while(curr!=NULL ){
-            Next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=Next;
-        }
-        return prev;
+        if(head==NULL || head->next==NULL) return head;
+        ListNode* newHead=reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return newHead;
+
     }    
+    
+    
 };
