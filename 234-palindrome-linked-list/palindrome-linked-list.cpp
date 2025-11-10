@@ -29,7 +29,10 @@ public:
     //     }
     //     return true;
     // }
+
+    //better than the 1st approach but not the optimised one 
     //2nd approach
+    //T.C O(3n) i.e. O(n) and S.C O(n)
     ListNode* reverse(ListNode* head) {
         if(head==NULL || head->next==NULL) return head;
         ListNode* newHead=reverse(head->next);
@@ -38,28 +41,53 @@ public:
         return newHead;
 
     }
-    bool isPalindrome(ListNode* head) {
-        ListNode* c=new ListNode(0);
-        ListNode* tc=c;
-        ListNode* t=head;
-        while(t!=NULL){
+    // bool isPalindrome(ListNode* head) {
+    //     ListNode* c=new ListNode(0);
+    //     ListNode* tc=c;
+    //     ListNode* t=head;
+    //     while(t!=NULL){
             
-            ListNode* p=new ListNode(t->val);
-            tc->next=p;
-            tc=tc->next;
-            t=t->next;
+    //         ListNode* p=new ListNode(t->val);
+    //         tc->next=p;
+    //         tc=tc->next;
+    //         t=t->next;
             
-        }
-        c=c->next;
-        c=reverse(c);
-        ListNode* a=head;
-        ListNode* b=c;
+    //     }
+    //     c=c->next;
+    //     c=reverse(c);
+    //     ListNode* a=head;
+    //     ListNode* b=c;
         
-        while(a!=NULL){
+    //     while(a!=NULL){
+    //         if(a->val!=b->val)return false;
+    //         a=a->next;
+    //         b=b->next;
+    //     }
+    //     return true;
+    // }
+
+    //3rd approach 
+    //T.C O(1)ho jayega agar hm middle element la ke aaju baaju ka value compare kr den to
+    //if 1st and 2nd half are equal then this is palindrome
+    bool isPalindrome(ListNode* head) {
+        ListNode* slow=head;
+        ListNode* fast=head; //head->next;(ye sirf even numbers of nodes ke liye uplabdh hoga isliye dono nodes ko head pe hi rakhenge aur whle(fas==NULL && fast->next!=NULL tk chalayenge))
+        while(fast->next!=NULL && fast->next->next!=NULL){
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        ListNode* secondpart=reverse(slow->next);
+        slow->next=secondpart;
+        ListNode* a=head;
+        ListNode* b=slow->next;
+        while(b){
             if(a->val!=b->val)return false;
             a=a->next;
             b=b->next;
+
         }
         return true;
+
+
     }
 };
