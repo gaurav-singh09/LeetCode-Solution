@@ -15,8 +15,8 @@ public:
                 neg+=2;
             }
         }
-        nums=ans;
-        return nums;
+        
+        return ans;
     }
 
 };
