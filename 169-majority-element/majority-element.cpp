@@ -5,7 +5,6 @@ public:
         for(int i=0;i<nums.size();i++){
             mpp[nums[i]]++;
         }
-        int cnt=0;
         for(auto it:mpp){
             if(it.second>nums.size()/2)return it.first;
         }
