@@ -11,10 +11,17 @@ public:
             sum+=r;
             n/=10;
         }
-        string s=to_string(sum);
-        reverse(s.begin(),s.end());
-        sum=stoll(s); 
-        return sum*add; 
+        long long s=0;
+        while(sum>0){
+            long long p=sum%10;
+            s*=10;
+            s+=p;
+            sum/=10;
+        }
+        // string s=to_string(sum);
+        // reverse(s.begin(),s.end());
+        // sum=stoll(s); 
+        return s*add; 
 
         
     }
