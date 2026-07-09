@@ -12,9 +12,9 @@ public:
     int countDistinctIntegers(vector<int>& nums) {
         int n=nums.size();
         unordered_set<int> s;
-        for(int i=0;i<n;i++){
-            int rev=reverse(nums[i]);
-            s.insert(nums[i]);
+        for(int num:nums){
+            int rev=reverse(num);
+            s.insert(num);
             s.insert(rev);
         }
 
