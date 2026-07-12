@@ -1,22 +1,51 @@
+class BSTIterator{
+    stack<TreeNode*>myStack;
+    //reverse->true->before
+    //reverse->false->next
+    bool reverse=true;
+public:
+    BSTIterator(TreeNode* root,bool isReverse){
+        reverse=isReverse;
+        pushAll(root);
+    }
+    bool hasNext(){
+        return !myStack.empty();
+    }
+    int next(){
+        TreeNode* tempNode=myStack.top();
+        myStack.pop();
+        if(!reverse)pushAll(tempNode->right);
+        else pushAll(tempNode->left);
+        return tempNode->val;
+    }
+
+private:
+    void pushAll(TreeNode* node){
+        for(;node!=NULL; ){
+            myStack.push(node);
+            if(reverse==true) node=node->right;
+            else node=node->left;
+        }
+    }
+
+};
+
 class Solution {
 public:
-    void inorder(TreeNode* root,vector<int>& ans){
-        if(root==NULL) return;
-        inorder(root->left,ans);
-        ans.push_back(root->val);
-        inorder(root->right,ans);
-        
-    }
+
     bool findTarget(TreeNode* root, int k) {
-        vector<int>nums;
-        inorder(root,nums);
-        int n=nums.size();
-        int i=0;
-        int j=n-1;
+        if(root==NULL) return false;
+        //next
+        BSTIterator l(root,false);
+        //for before
+        BSTIterator r(root,true);
+        
+        int i=l.next();
+        int j=r.next();
         while(i<j){
-            if(nums[i]+nums[j]==k) return true;
-            else if((nums[i]+nums[j])>k) j--;
-            else i++;
+            if(i+j==k ) return true;
+            else if(i+j<k) i=l.next();
+            else j=r.next();
         }
         return false;
     }
