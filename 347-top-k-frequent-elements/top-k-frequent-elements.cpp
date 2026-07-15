@@ -18,8 +18,6 @@ public:
                 if(ans.size()==k)break;
             }
         }
-
         return ans;
-
     }
 };
