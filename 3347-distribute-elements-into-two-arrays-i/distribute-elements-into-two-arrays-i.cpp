@@ -21,10 +21,13 @@ public:
                 k++;
             }
         }
-        int m=v2.size();
-        for(int i=0;i<m;i++){
-            v1.push_back(v2[i]);
+        for(int i=0;i<v1.size();i++){
+            nums[i]=v1[i];
         }
-        return v1;
+        int r=0;
+        for(int i=v1.size();i<v1.size()+v2.size();i++){
+            nums[i]=v2[r++];
+        }
+        return nums;
     }
 };
